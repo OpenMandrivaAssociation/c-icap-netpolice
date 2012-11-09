@@ -1,0 +1,36 @@
+--- Makefile.am	2008-07-06 22:31:43.000000000 +0200
++++ Makefile.am.oden	2008-08-14 14:56:43.000000000 +0200
+@@ -4,9 +4,9 @@
+ MODULESDIR=$(pkglibdir)/
+ SERVICESDIR=$(pkglibdir)/
+ #CONFIGDIR=$(sysconfdir)/
+-LOGDIR=$(localstatedir)/log/
+-SOCKDIR=/var/run/c-icap
+-
++LOGDIR=/var/log/
++SOCKDIR=/var/run/icapd
++DESTDIR=
+ 
+ SUBDIRS =  . modules services
+ 
+@@ -65,16 +65,10 @@
+ 
+ install-data-local:
+ 	$(mkinstalldirs) $(DESTDIR)$(CONFIGDIR);
+-	$(INSTALL) c-icap.conf $(DESTDIR)$(CONFIGDIR)/c-icap.conf.default
+-	$(INSTALL) c-icap.magic $(DESTDIR)$(CONFIGDIR)/c-icap.magic.default
+-	if test ! -f $(DESTDIR)$(CONFIGDIR)/c-icap.conf; then  $(INSTALL) c-icap.conf $(DESTDIR)$(CONFIGDIR)/c-icap.conf; fi
+-	if test ! -f $(DESTDIR)$(CONFIGDIR)/c-icap.magic; then $(INSTALL) c-icap.magic $(DESTDIR)$(CONFIGDIR)/c-icap.magic; fi
+-	$(mkinstalldirs)  $(DESTDIR)$(LOGDIR); 
+-	$(mkinstalldirs)  $(DESTDIR)$(SOCKDIR);
+-	chgrp nobody $(DESTDIR)$(LOGDIR)
+-	chmod 775 $(DESTDIR)$(LOGDIR)
+-	chgrp nobody $(DESTDIR)$(SOCKDIR)
+-	chmod 775 $(DESTDIR)$(SOCKDIR)
++	$(mkinstalldirs) $(DESTDIR)$(LOGDIR); 
++	$(mkinstalldirs) $(DESTDIR)$(SOCKDIR);
++	$(INSTALL) c-icap.conf $(DESTDIR)$(CONFIGDIR)/c-icap.conf
++	$(INSTALL) c-icap.magic $(DESTDIR)$(CONFIGDIR)/c-icap.magic
+ 
+ EXTRA_DIST= RECONF INSTALL.txt include/config-w32.h makefile.w32 c-icap.conf c_icap_dll.mak c-icap.conf.in c-icap.magic  c_icap.mak c_icap.def \
+              contrib/get_file.pl contrib/convert_old_magic.pl \

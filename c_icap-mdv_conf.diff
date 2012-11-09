@@ -1,0 +1,60 @@
+--- c-icap.conf.in	2007-04-17 19:53:17.000000000 +0200
++++ c-icap.conf.in.oden	2008-04-17 19:48:16.000000000 +0200
+@@ -3,8 +3,8 @@
+ #
+ 
+ 
+-PidFile /var/run/c-icap.pid
+-CommandsSocket /var/run/c-icap/c-icap.ctl
++PidFile /var/run/icapd/icapd.pid
++CommandsSocket /var/run/icapd/icapd.ctl
+ Timeout 300
+ KeepAlive On
+ MaxKeepAliveRequests 100
+@@ -19,8 +19,8 @@
+ 
+ 
+ Port 1344 
+-User wwwrun
+-Group nobody
++User icapd
++Group icapd
+ 
+ 
+ #ServerAdmin you@your.address # Not implemented yet
+@@ -29,11 +29,11 @@
+ TmpDir /var/tmp
+ MaxMemObject 131072
+ 
+-ServerLog @prefix@/var/log/server.log
+-AccessLog @prefix@/var/log/access.log
++ServerLog /var/log/icapd/server.log
++AccessLog /var/log/icapd/access.log
+ #DebugLevel 3
+ 
+-ModulesDir @prefix@/lib/c_icap
++ModulesDir @libdir@/c_icap
+ Module logger sys_logger.so
+ Module perl_handler perl_handler.so
+ 
+@@ -89,7 +89,7 @@
+ #AuthMethod basic file_basic 
+ 
+ 
+-ServicesDir @prefix@/lib/c_icap
++ServicesDir @libdir@/c_icap
+ Service echo_module srv_echo.so
+ Service url_check_module srv_url_check.so
+ Service antivirus_module srv_clamav.so
+@@ -122,9 +122,9 @@
+ 
+ # And here the viralator-like mode.
+ # where to save documents
+-srv_clamav.VirSaveDir /srv/www/htdocs/downloads/
++srv_clamav.VirSaveDir /var/www/html/downloads/
+ # from where the documents can be retrieved (you can find the get_file.pl script in contrib dir)
+-srv_clamav.VirHTTPServer  "http://fortune/cgi-bin/get_file.pl?usename=%f&remove=1&file="
++srv_clamav.VirHTTPServer  "http://localhost/cgi-bin/get_file.pl?usename=%f&remove=1&file="
+ # The refresh  rate....
+ srv_clamav.VirUpdateTime   15
+ # For which filetypes the "virelator like mode" will be used.

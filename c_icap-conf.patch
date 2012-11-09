@@ -1,0 +1,68 @@
+--- c-icap.conf.in	Tue Dec 07 20:10:17 2010 +0300
++++ c-icap.conf.in	Tue Dec 07 20:20:23 2010 +0300
+@@ -10,11 +10,11 @@
+ MaxKeepAliveRequests 100
+ ## set KeepAliveTimeout to -1 for no timeout
+ KeepAliveTimeout 600  
+-StartServers 3
+-MaxServers 10
++StartServers 10
++MaxServers 100
+ MinSpareThreads     10
+ MaxSpareThreads     20
+-ThreadsPerChild     10
++ThreadsPerChild     100
+ MaxRequestsPerChild  0
+ 
+ 
+@@ -37,8 +37,8 @@
+ Module logger sys_logger.so
+ Module perl_handler perl_handler.so
+ 
+-sys_logger.Prefix "C-ICAP:"
+-sys_logger.Facility local1
++sys_logger.Prefix "C-ICAP"
++sys_logger.Facility daemon
+ 
+ ##Specify wich logger to use......
+ #Logger sys_logger
+@@ -129,3 +129,39 @@
+ srv_clamav.VirUpdateTime   15
+ # For which filetypes the "virelator like mode" will be used.
+ srv_clamav.VirScanFileTypes ARCHIVE EXECUTABLE
++
++Service url_filter_module srv_url_filter.so
++
++# Memcached server list for url_filter
++url_filter.MemcachedServers "127.0.0.1:11211"
++
++# host2cat server for url_filter
++url_filter.Host2CatServer "127.0.0.1:6666"
++
++# Database settings
++url_filter.DBEngine "sqlite3"
++#url_filter.DBHost "localhost"
++#url_filter.DBPort "5432"
++url_filter.DBName "/var/cache/host2cat/filter.db"
++#url_filter.DBUser "username"
++#url_filter.DBPass "password"
++
++url_filter.RedirectUrl "http://block.netpolice.ru/"
++
++#url_filter.ClientIPHeader "X-Client-IP"
++#url_filter.AuthUserHeader "X-Authenticated-User"
++#url_filter.AuthUserPrefix "Local://"
++#url_filter.AuthUserEncoded 0
++
++# Default policy settings
++# Values are: 0 - accept, 1 - reject, 2 - redirect
++#url_filter.DBOpenErrorPolicy  1
++#url_filter.DBQueryErrorPolicy 0
++#url_filter.UnknownRolePolicy  1
++#url_filter.MemcachedConnectErrorPolicy        1
++#url_filter.MemcachedMissPolicy                0
++#url_filter.EmptyCategoryPolicy                0
++url_filter.CategoryNotFoundPolicy      0
++
++# Default value - LOG_INFO
++#url_filter.SyslogPriority             6

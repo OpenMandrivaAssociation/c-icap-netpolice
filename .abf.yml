@@ -1,0 +1,5 @@
+sources:
+  "c_icap-060708rc3.tar.gz:"	4aab54c81803759459f78b345fac4a982e3b0737
+  "icapd.init:"	cadc007c22422d7e7c014782190f457295ee2758
+  "icapd.logrotate:"	d47c05a201616ced4829b143d9e6be005d8e2769
+  "icapd.sysconfig:"	64bfe9cc9c509f4bc3e60c5e4c00875ade62f239
