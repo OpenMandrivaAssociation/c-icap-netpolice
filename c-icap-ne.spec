@@ -10,7 +10,7 @@ Version:	060708
 Release:	%mkrel 1
 License:	GPL
 Group:		System/Servers
-URL:		http://sourceforge.net/projects/c-icap/
+URL:		https://sourceforge.net/projects/c-icap/
 Source0:	c_icap-%{version}rc3.tar.gz
 Source1:	icapd.init
 Source2:	icapd.sysconfig
