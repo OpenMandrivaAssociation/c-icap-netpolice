@@ -20,6 +20,8 @@ Patch1:		c_icap-makefile.patch
 Patch2:		c_icap-030606-perllib_fix.patch
 Patch3:		c_icap-base64.patch
 Patch4:         c_icap-conf.patch
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
 BuildRequires:	clamav-devel
 BuildRequires:	chrpath
 BuildRequires:	dos2unix
